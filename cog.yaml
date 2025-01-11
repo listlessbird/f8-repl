@@ -35,5 +35,12 @@ build:
     - "x_transformers>=1.31.14"
     - "faster-whisper==0.10.1"
     - "huggingface_hub"
+  run:
+    - mkdir -p models/F5-TTS/F5TTS_Base
+    - mkdir -p models/whisper
+    - mkdir -p models/vocos
+    - curl -o models/vocos/config.yaml https://huggingface.co/charactr/vocos-mel-24khz/raw/main/config.yaml
+    - curl -o models/vocos/pytorch_model.bin https://huggingface.co/charactr/vocos-mel-24khz/resolve/main/pytorch_model.bin
+    - huggingface-cli download --repo-type model --revision main SWivid/F5-TTS --local-dir models/F5-TTS
 
 predict: "predict.py:Predictor"
